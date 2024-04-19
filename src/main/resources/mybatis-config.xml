@@ -1,0 +1,13 @@
+<configuration>
+    spring.datasource.url=jdbc:postgresql://localhost:5432/tuum_db
+    spring.datasource.username=tuum_app
+    spring.datasource.password=tuum-db-pass
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    <mappers>
+        <mapper namespace="org.example.tuum.mapper.AccountMapper">
+            <select id="getAccounts" resultType="org.example.tuum.model.Account">
+                SELECT * FROM account
+            </select>
+        </mapper>
+    </mappers>
+</configuration>

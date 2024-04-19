@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  spring-app:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tuum_db
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: tuum_db
+      POSTGRES_USER: tuum_app
+      POSTGRES_PASSWORD: tuum-db-pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
