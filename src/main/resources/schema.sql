@@ -4,6 +4,12 @@ CREATE TABLE IF NOT EXISTS public.account (
                                               country VARCHAR(255) NOT NULL
 );
 
+
+CREATE TABLE IF NOT EXISTS public.currency (
+                                               currencyid SERIAL PRIMARY KEY,
+                                               currencycode VARCHAR(255) UNIQUE
+);
+
 CREATE TABLE IF NOT EXISTS public.balance (
                                               balanceid SERIAL PRIMARY KEY,
                                               accountid INTEGER,
@@ -13,10 +19,6 @@ CREATE TABLE IF NOT EXISTS public.balance (
                                               FOREIGN KEY (currencyid) REFERENCES public.currency(currencyid)
 );
 
-CREATE TABLE IF NOT EXISTS public.currency (
-                                               currencyid SERIAL PRIMARY KEY,
-                                               currencycode VARCHAR(255)
-);
 
 CREATE TABLE IF NOT EXISTS public.transaction (
                                                   transactionid SERIAL PRIMARY KEY,
@@ -29,8 +31,10 @@ CREATE TABLE IF NOT EXISTS public.transaction (
                                                   FOREIGN KEY (accountid) REFERENCES public.account(accountid)
 );
 
-INSERT INTO public.currency (currencycode) VALUES
-                                               ('USD'),
-                                               ('EUR'),
-                                               ('SEK'),
-                                               ('GBP');
+INSERT INTO public.currency (currencycode)
+VALUES
+    ('USD'),
+    ('EUR'),
+    ('SEK'),
+    ('GBP')
+ON CONFLICT (currencycode) DO NOTHING;
