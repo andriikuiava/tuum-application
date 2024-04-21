@@ -36,4 +36,3 @@
 - **URL:** `GET http://localhost:8080/transactions/{transaction_id}`
 - **Parameters:**
     - `transaction_id`: ID of the transaction to retrieve
-```
